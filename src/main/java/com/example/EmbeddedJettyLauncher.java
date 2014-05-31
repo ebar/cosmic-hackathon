@@ -10,7 +10,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  * launching should fire this main method.
  *
  */
-public class Main {
+public class EmbeddedJettyLauncher {
     
     /**
      * @param args

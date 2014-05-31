@@ -393,7 +393,7 @@
     <li>
       <script>document.write("<code>cd " + appname() + "</code>")</script>
     </li>
-    <li>Open <code>src/main/java/com/example/HelloServlet.java</code> with your favorite editor</li>
+    <li>Open <code>src/main/java/com/cosmic/HelloServlet.java</code> with your favorite editor</li>
     <li>Modify line 20 with:
       <code>
         out.write("Deployed first change!".getBytes());

@@ -29,7 +29,7 @@ public class QuestionnaireServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
         QuestionnaireJsonTransformer transformer = new QuestionnaireJsonTransformer();
-        JSONObject jsonObject;
+        JSONObject jsonObject = null;
 		try {
 			jsonObject = transformer.createJson();
 		} catch (URISyntaxException e) {

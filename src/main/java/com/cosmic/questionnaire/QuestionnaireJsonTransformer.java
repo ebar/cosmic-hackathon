@@ -14,17 +14,17 @@ public class QuestionnaireJsonTransformer {
 		
 		JSONObject questionnaireObject = new JSONObject();
 		
-	//	File questionnaireDirectory = new File("feedback/questionnaire");
+		File questionnaireDirectory = new File("src/main/webapp/feedback/questionnaire");
 		
-		File file = new File(QuestionnaireJsonTransformer.class.getClassLoader().getResource("feedback/questionnaire").getFile());
+//		File file = new File(QuestionnaireJsonTransformer.class.getClassLoader().getResource("feedback/questionnaire").getFile());
 		
-		System.out.println(file);
+		System.out.println(questionnaireDirectory);
 		
-		if (file.isDirectory()) {
-			String[] categories = file.list();
+		if (questionnaireDirectory.isDirectory()) {
+			String[] categories = questionnaireDirectory.list();
 			JSONArray categoryArray = new JSONArray();
 			for (String category : categories) {
-				createCategoryObject(file, categoryArray,
+				createCategoryObject(questionnaireDirectory, categoryArray,
 						category);
 				
 			}

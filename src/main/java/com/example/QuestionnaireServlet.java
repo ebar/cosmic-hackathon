@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -28,7 +29,13 @@ public class QuestionnaireServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
         QuestionnaireJsonTransformer transformer = new QuestionnaireJsonTransformer();
-        JSONObject jsonObject = transformer.createJson();
+        JSONObject jsonObject;
+		try {
+			jsonObject = transformer.createJson();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         resp.setContentType("text/html");
         resp.setStatus(200);
         

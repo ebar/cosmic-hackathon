@@ -1,6 +1,8 @@
 package com.cosmic.questionnaire;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -8,17 +10,21 @@ import org.json.simple.JSONObject;
 public class QuestionnaireJsonTransformer {
  
 	@SuppressWarnings("unchecked")
-	public JSONObject createJson() {
+	public JSONObject createJson() throws MalformedURLException {
 		
 		JSONObject questionnaireObject = new JSONObject();
 		
-		File questionnaireDirectory = new File("feedback/questionnaire");
+	//	File questionnaireDirectory = new File("feedback/questionnaire");
 		
-		if (questionnaireDirectory.isDirectory()) {
-			String[] categories = questionnaireDirectory.list();
+		File file = new File(QuestionnaireJsonTransformer.class.getClassLoader().getResource("feedback/questionnaire").getFile());
+		
+		System.out.println(file);
+		
+		if (file.isDirectory()) {
+			String[] categories = file.list();
 			JSONArray categoryArray = new JSONArray();
 			for (String category : categories) {
-				createCategoryObject(questionnaireDirectory, categoryArray,
+				createCategoryObject(file, categoryArray,
 						category);
 				
 			}
@@ -30,7 +36,7 @@ public class QuestionnaireJsonTransformer {
 
 	@SuppressWarnings("unchecked")
 	private void createCategoryObject(File questionnaireDirectory,
-			JSONArray categoryArray, String category) {
+			JSONArray categoryArray, String category) throws MalformedURLException {
 		File categoryDirectory = new File(questionnaireDirectory, category);
 		JSONObject categoryObject = new JSONObject();
 		if (categoryDirectory.isDirectory()) {
@@ -50,7 +56,7 @@ public class QuestionnaireJsonTransformer {
 
 	@SuppressWarnings("unchecked")
 	private void createQuestionObject(File categoryDirectory,
-			JSONArray allQuestionsArray, String question) {
+			JSONArray allQuestionsArray, String question) throws MalformedURLException {
 		File questionDirectory = new File(categoryDirectory, question);
 		JSONObject questionObject = new JSONObject();
 		if (questionDirectory.isDirectory()) {
@@ -59,7 +65,7 @@ public class QuestionnaireJsonTransformer {
 			for (String option : options) {
 				File optionFile = new File(questionDirectory, option);
 				JSONObject optionObject = new JSONObject();
-				optionObject.put("imageUrl", optionFile.toURI());
+				optionObject.put("imageUrl", optionFile.toURI().toURL());
 				optionsArray.add(optionObject);
 			}
 			questionObject.put("title", questionDirectory.getName());

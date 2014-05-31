@@ -28,7 +28,13 @@ public class CsvWriterTest {
 		jsonArray.add(answer1);
 		jsonArray.add(answer2);
 		
-		fileWriter.writeToCsv(jsonArray);
+		JSONObject testObject = new JSONObject();
+		
+		testObject.put("results", jsonArray);
+		
+		fileWriter.writeToCsv(testObject);
+		
+		System.out.println(testObject);
 		
 		File createdFile = new File("results.csv");
 		

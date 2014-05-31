@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 
 public class CsvFileWriter {
 	
-	public void writeToCsv(JSONArray jsonArray) throws IOException {
+	public void writeToCsv(JSONObject resultsJson) throws IOException {
 		
 		File results = new File("results.csv");
 		FileWriter fileWriter = new FileWriter(results);
@@ -18,6 +18,8 @@ public class CsvFileWriter {
 		fileWriter.write(",");
 		fileWriter.write("Answers");
 		fileWriter.write(System.getProperty("line.separator"));
+		
+		JSONArray jsonArray = (JSONArray) resultsJson.get("results");
 
 		for (Object object : jsonArray.toArray()) {
 			JSONObject jsonObject = (JSONObject) object;

@@ -37,7 +37,8 @@ public class QuestionnaireServlet extends HttpServlet {
     }
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse resp)
+	           throws ServletException, IOException{
 		JSONParser parser = new JSONParser();
 		Object object = "";
 		try {
@@ -45,10 +46,13 @@ public class QuestionnaireServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		JSONArray jsonArray = (JSONArray) object;
+		JSONObject jsonArray = (JSONObject) object;
 		CsvFileWriter csvWriter = new CsvFileWriter();
 		csvWriter.writeToCsv(jsonArray);
 		
+		
+		PrintWriter out = resp.getWriter();
+		out.println("Thankyou!");
 	}
 	
     

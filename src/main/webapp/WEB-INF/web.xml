@@ -11,12 +11,12 @@
     
   <servlet>
     <servlet-name>questionnaireJson</servlet-name>
-    <servlet-class>com.example.JsonServlet</servlet-class>
+    <servlet-class>com.example.QuestionnaireServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>questionnaireJson</servlet-name>
-    <url-pattern>/questionnaire</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
 

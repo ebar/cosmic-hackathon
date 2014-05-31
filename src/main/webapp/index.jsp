@@ -8,6 +8,5 @@
     <%= request.getAttribute("structure") %>
     <script>
     </script>
-    <button>Finish</button>
   </body>
 </html>

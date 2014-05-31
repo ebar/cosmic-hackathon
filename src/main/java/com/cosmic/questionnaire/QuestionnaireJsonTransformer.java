@@ -2,6 +2,8 @@ package com.cosmic.questionnaire;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.json.simple.JSONArray;
@@ -10,7 +12,7 @@ import org.json.simple.JSONObject;
 public class QuestionnaireJsonTransformer {
  
 	@SuppressWarnings("unchecked")
-	public JSONObject createJson() throws MalformedURLException {
+	public JSONObject createJson() throws MalformedURLException, URISyntaxException {
 		
 		JSONObject questionnaireObject = new JSONObject();
 		
@@ -36,7 +38,7 @@ public class QuestionnaireJsonTransformer {
 
 	@SuppressWarnings("unchecked")
 	private void createCategoryObject(File questionnaireDirectory,
-			JSONArray categoryArray, String category) throws MalformedURLException {
+			JSONArray categoryArray, String category) throws MalformedURLException, URISyntaxException {
 		File categoryDirectory = new File(questionnaireDirectory, category);
 		JSONObject categoryObject = new JSONObject();
 		if (categoryDirectory.isDirectory()) {
@@ -56,7 +58,7 @@ public class QuestionnaireJsonTransformer {
 
 	@SuppressWarnings("unchecked")
 	private void createQuestionObject(File categoryDirectory,
-			JSONArray allQuestionsArray, String question) throws MalformedURLException {
+			JSONArray allQuestionsArray, String question) throws MalformedURLException, URISyntaxException {
 		File questionDirectory = new File(categoryDirectory, question);
 		JSONObject questionObject = new JSONObject();
 		if (questionDirectory.isDirectory()) {
@@ -65,7 +67,12 @@ public class QuestionnaireJsonTransformer {
 			for (String option : options) {
 				File optionFile = new File(questionDirectory, option);
 				JSONObject optionObject = new JSONObject();
-				optionObject.put("imageUrl", optionFile.toURI().toURL());
+				URL fullUrl = optionFile.toURI().toURL();
+				
+				URI uri = optionFile.toURI();
+				uri.relativize(new URI("/app/src/main/webapp/feedback"));
+				optionObject.put("imageUrl", uri);
+				
 				optionsArray.add(optionObject);
 			}
 			questionObject.put("title", questionDirectory.getName());

@@ -16,7 +16,7 @@
 
   <servlet-mapping>
     <servlet-name>questionnaireJson</servlet-name>
-    <url-pattern>/questionnaire</url-pattern>
+    <url-pattern>/feedback</url-pattern>
   </servlet-mapping>
 
 

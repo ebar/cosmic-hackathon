@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
 public class QuestionnaireJsonTransformer {
  
 	@SuppressWarnings("unchecked")
-	public static JSONObject createJson() {
+	public JSONObject createJson() {
 		
 		JSONObject questionnaireObject = new JSONObject();
 		
@@ -32,7 +32,7 @@ public class QuestionnaireJsonTransformer {
 							for (String option : options) {
 								File optionFile = new File(questionDirectory, option);
 								JSONObject optionObject = new JSONObject();
-								optionObject.put("imageUrl", optionFile.getAbsolutePath());
+								optionObject.put("imageUrl", optionFile.toURI());
 								optionsArray.add(optionObject);
 							}
 							questionObject.put("title", questionDirectory.getName());
@@ -53,11 +53,4 @@ public class QuestionnaireJsonTransformer {
 		return questionnaireObject;
 		
 	}
-
-	
-	public static void main(String[] args) {
-		System.out.println(createJson());
-	}
-
-	
 }

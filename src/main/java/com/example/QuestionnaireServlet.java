@@ -36,12 +36,13 @@ public class QuestionnaireServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		resp.addHeader("Access-Control-Allow-Origin", "*");
         resp.setContentType("text/html");
         resp.setStatus(200);
         
         request.setAttribute("structure", jsonObject.toString());
         request.getRequestDispatcher("index.jsp").forward(request, resp);
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+        
     }
 	
 	@Override

@@ -41,6 +41,7 @@ public class QuestionnaireServlet extends HttpServlet {
         
         request.setAttribute("structure", jsonObject.toString());
         request.getRequestDispatcher("index.jsp").forward(request, resp);
+        resp.addHeader("Access-Control-Allow-Origin", "*");
     }
 	
 	@Override
@@ -56,6 +57,7 @@ public class QuestionnaireServlet extends HttpServlet {
 		JSONObject jsonArray = (JSONObject) object;
 		CsvFileWriter csvWriter = new CsvFileWriter();
 		csvWriter.writeToCsv(jsonArray);
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		
 		
 		PrintWriter out = resp.getWriter();
